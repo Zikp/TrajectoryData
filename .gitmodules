@@ -1,0 +1,6 @@
+[submodule "Plugins/XField_Core"]
+	path = Plugins/XField_Core
+	url = https://e.coding.net/romtek/xfield/XField_Core.git
+[submodule "Plugins/XField_Draw"]
+	path = Plugins/XField_Draw
+	url = https://e.coding.net/romtek/xfield/XFieldDraw.git
