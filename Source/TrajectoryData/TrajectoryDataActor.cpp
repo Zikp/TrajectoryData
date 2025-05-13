@@ -14,6 +14,23 @@ ATrajectoryDataActor::ATrajectoryDataActor()
 void ATrajectoryDataActor::BeginPlay()
 {
     Super::BeginPlay();
+
+    TSharedRef<IHttpRequest, ESPMode::ThreadSafe> HttpReuest = FHttpModule::Get().CreateRequest();
+    HttpReuest->SetURL("http://127.0.0.1:5001/twinscore/get_all_scenes"); // 设置访问的地址
+    HttpReuest->SetVerb(TEXT("POST")); // 选择 GET 还是 POST 方式请求
+    // HttpReuest->SetHeader(TEXT("Content-Type"), TEXT("application/json")); // 设置 Header
+    HttpReuest->SetContentAsString("{}");// 如果是 POST 上传 Json 就用这个
+    HttpReuest->OnProcessRequestComplete().BindUObject(this, &ThisClass::OnRequestComplete);; // 绑定请求完成时候的回调函数
+    // HttpReuest->OnRequestProgress().BindRaw(this, &FHttpRequestTest::OnRequestProgress); // 下载东西时检查进度用的
+    HttpReuest->ProcessRequest(); // 发送这个请求
+}
+
+void ATrajectoryDataActor::OnRequestComplete(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded) 
+{
+    if (bSucceeded)
+    {
+        //UE_LOG();
+    }
 }
 
 void ATrajectoryDataActor::Tick(float DeltaTime)

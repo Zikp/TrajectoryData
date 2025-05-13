@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/IHttpRequest.h"
+#include "Http.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "TrajectoryDataActor.generated.h"
 
 USTRUCT(BlueprintType)
@@ -35,6 +39,8 @@ public:
 
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
+
+    void OnRequestComplete(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
 
     UFUNCTION(BlueprintCallable, Category = "Flight Trajectory")
     void LoadFlightData(const FString& FilePath);
